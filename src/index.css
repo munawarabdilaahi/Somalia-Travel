@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Premium Travel Platform Design System - All colors MUST be HSL */
+
+@layer base {
+  :root {
+    /* Core Background & Text */
+    --background: 0 0% 100%;
+    --foreground: 215 25% 27%;
+
+    /* Card System */
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 27%;
+
+    /* Popover System */
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 27%;
+
+    /* Premium Travel Brand Colors */
+    --primary: 210 100% 45%;          /* Ocean Blue */
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 210 100% 70%;    /* Light Ocean */
+    --primary-dark: 210 100% 25%;     /* Deep Ocean */
+    --primary-glow: 210 100% 85%;     /* Glowing Ocean */
+
+    --secondary: 25 95% 53%;          /* Sunset Coral */
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 25 95% 75%;    /* Light Coral */
+    --secondary-dark: 25 95% 35%;     /* Deep Coral */
+
+    --accent: 45 100% 51%;            /* Golden Sun */
+    --accent-foreground: 215 25% 27%;
+    --accent-light: 45 100% 85%;      /* Light Gold */
+    --accent-dark: 45 100% 35%;       /* Deep Gold */
+
+    /* Luxury Purple Accent */
+    --luxury: 280 100% 55%;           /* Luxury Purple */
+    --luxury-foreground: 0 0% 100%;
+    --luxury-light: 280 100% 85%;     /* Light Purple */
+
+    /* Neutral System */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 90%;
+    --input: 210 20% 95%;
+    --ring: 210 100% 45%;
+
+    /* Premium Travel Gradients */
+    --gradient-ocean: linear-gradient(135deg, hsl(210 100% 45%), hsl(195 100% 50%), hsl(210 100% 35%));
+    --gradient-sunset: linear-gradient(135deg, hsl(25 95% 53%), hsl(45 100% 51%), hsl(35 95% 45%));
+    --gradient-sky: linear-gradient(180deg, hsl(210 100% 85%), hsl(220 100% 95%), hsl(0 0% 100%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 100% 35%) 0%, hsl(195 100% 45%) 30%, hsl(25 95% 53%) 70%, hsl(45 100% 51%) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(280 100% 55%), hsl(260 100% 60%), hsl(240 100% 65%));
+    --gradient-premium: linear-gradient(135deg, hsl(210 100% 25%), hsl(280 100% 35%), hsl(25 95% 35%));
+    --gradient-glow: linear-gradient(135deg, hsl(210 100% 85%) 0%, hsl(280 100% 85%) 50%, hsl(45 100% 85%) 100%);
+
+    /* Enhanced Shadows & Effects */
+    --shadow-elegant: 0 20px 40px -10px hsl(210 100% 45% / 0.3);
+    --shadow-card: 0 8px 32px -4px hsl(210 20% 20% / 0.12);
+    --shadow-travel: 0 16px 48px -8px hsl(210 100% 45% / 0.25);
+    --shadow-luxury: 0 20px 50px -10px hsl(280 100% 55% / 0.3);
+    --shadow-glow: 0 0 40px hsl(210 100% 85% / 0.6);
+    --shadow-premium: 0 25px 60px -15px hsl(210 100% 25% / 0.4);
+
+    /* Enhanced Animation Variables */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-luxury: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    --transition-glow: all 0.6s ease-in-out;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Premium Component Styles */
+  .btn-premium {
+    @apply relative overflow-hidden bg-gradient-premium text-white font-semibold px-8 py-4 rounded-xl;
+    @apply hover:shadow-premium transition-all duration-300 hover:scale-105;
+    @apply before:absolute before:inset-0 before:bg-gradient-luxury before:opacity-0;
+    @apply hover:before:opacity-20 before:transition-opacity before:duration-300;
+  }
+
+  .card-luxury {
+    @apply bg-white/95 backdrop-blur-xl border-0 shadow-luxury rounded-2xl;
+    @apply hover:shadow-premium transition-all duration-500 hover:-translate-y-2;
+  }
+
+  .glass-effect {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary-glow) / 0.5);
+  }
+
+  .floating-animation {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .animate-scale-in-bounce {
+    animation: scaleInBounce 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+  }
+
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px hsl(var(--primary-glow) / 0.3); }
+  50% { box-shadow: 0 0 40px hsl(var(--primary-glow) / 0.6); }
+}
+
+@keyframes fadeInUp {
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleInBounce {
+  0% { opacity: 0; transform: scale(0.3); }
+  50% { opacity: 1; transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(50px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
