@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff, Mail, Lock, User, Phone } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import AdminPage from "@/pages/AdminPage";
+import AdminPage from "@/pages/AdminLogin";
 
 interface AuthModalProps {
   isOpen: boolean;

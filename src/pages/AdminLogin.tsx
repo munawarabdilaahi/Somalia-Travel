@@ -1,15 +1,16 @@
-import { useAuth } from '@/components/AuthProvider';
-import { Navigate } from 'react-router-dom';
+// =================== AdminPage.tsx ===================
 import { useState } from "react";
-import { Package, Users, DollarSign, Star, Calendar, Eye, Edit, Trash2, Plus } from "lucide-react";
+import { Package, Users, DollarSign, Star, Eye, LogOut } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import { travelPackages } from "@/data/packages";
 import { Booking } from "@/types/travel";
 
+// =================== Xogtaada ===================
 const mockBookings: Booking[] = [
   {
     id: "B001",
@@ -22,34 +23,20 @@ const mockBookings: Booking[] = [
     specialRequests: "Halal meals preferred",
     totalPrice: 1798,
     status: "confirmed",
-    createdAt: "2024-02-10T10:30:00Z"
-  },
-
-  {
-    id: "B001",
-    packageId: "somalia-4",
-    customerName: "Ahmed Maxamed",
-    email: "ahmed.m@email.com",
-    phone: "+252-61-544-1970",
-    travelers: 2,
-    departureDate: "2024-08-22",
-    specialRequests: "Halal meals preferred",
-    totalPrice: 2697,
-    status: "confirmed",
-    createdAt: "2024-02-10T10:30:00Z"
+    createdAt: "2024-02-01T10:00:00Z"
   },
   {
     id: "B002",
     packageId: "somalia-2",
-    customerName: "Fatima Ali",
-    email: "fatima.ali@email.com",
+    customerName: "Amina Yusuf",
+    email: "amina.yusuf@email.com",
     phone: "+252-61-987-6543",
-    travelers: 4,
+    travelers: 3,
     departureDate: "2024-04-10",
-    specialRequests: "Window seats on flights",
-    totalPrice: 3596,
+    specialRequests: "Window seats",
+    totalPrice: 2697,
     status: "pending",
-    createdAt: "2024-02-12T14:45:00Z"
+    createdAt: "2024-02-05T11:30:00Z"
   },
   {
     id: "B003",
@@ -67,229 +54,234 @@ const mockBookings: Booking[] = [
   {
     id: "B004",
     packageId: "somalia-4",
-    customerName: "Aisha Yusuf",
-    email: "aisha.yusuf@email.com",
-    phone: "+252-91-456-7890",
-    travelers: 3,
+    customerName: "Fatima Ali",
+    email: "fatima.ali@email.com",
+    phone: "+252-61-555-9876",
+    travelers: 2,
     departureDate: "2024-06-01",
-    specialRequests: "Extra luggage allowance",
-    totalPrice: 2697,
+    specialRequests: "Extra luggage",
+    totalPrice: 1598,
     status: "confirmed",
-    createdAt: "2024-02-16T11:00:00Z"
+    createdAt: "2024-03-01T08:15:00Z"
   },
   {
     id: "B005",
     packageId: "somalia-1",
     customerName: "Hassan Mohamed",
     email: "hassan.mohamed@email.com",
-    phone: "+252-61-333-2222",
-    travelers: 2,
-    departureDate: "2024-07-20",
-    specialRequests: "Near swimming pool",
-    totalPrice: 1798,
-    status: "confirmed",
-    createdAt: "2024-02-18T08:10:00Z"
+    phone: "+252-90-321-4567",
+    travelers: 4,
+    departureDate: "2024-07-12",
+    specialRequests: "Child seats",
+    totalPrice: 3596,
+    status: "pending",
+    createdAt: "2024-03-10T14:45:00Z"
   },
   {
     id: "B006",
-    packageId: "somalia-2",
-    customerName: "Layla Ibrahim",
-    email: "layla.ibrahim@email.com",
-    phone: "+252-62-111-4444",
-    travelers: 5,
-    departureDate: "2024-08-02",
-    specialRequests: "Family suite rooms",
-    totalPrice: 4495,
-    status: "pending",
-    createdAt: "2024-02-19T13:25:00Z"
+    packageId: "somalia-4",
+    customerName: "Zahra Osman",
+    email: "zahra.osman@email.com",
+    phone: "+252-61-678-1234",
+    travelers: 1,
+    departureDate: "2024-08-05",
+    specialRequests: "Wheelchair accessible",
+    totalPrice: 899,
+    status: "confirmed",
+    createdAt: "2024-03-20T10:30:00Z"
   },
   {
     id: "B007",
-    packageId: "somalia-3",
-    customerName: "Omar Ahmed",
-    email: "omar.ahmed@email.com",
-    phone: "+252-63-765-4321",
+    packageId: "somalia-2",
+    customerName: "Abdirahman Noor",
+    email: "abdirahman.noor@email.com",
+    phone: "+252-61-777-8888",
     travelers: 2,
-    departureDate: "2024-09-10",
-    specialRequests: "Guided tours only",
+    departureDate: "2024-09-15",
+    specialRequests: "Vegetarian meals",
     totalPrice: 1798,
-    status: "confirmed",
-    createdAt: "2024-02-20T16:40:00Z"
+    status: "cancelled",
+    createdAt: "2024-04-01T09:00:00Z"
   },
   {
     id: "B008",
-    packageId: "somalia-4",
-    customerName: "Khadra Warsame",
-    email: "khadra.warsame@email.com",
-    phone: "+252-90-222-3333",
+    packageId: "somalia-1",
+    customerName: "Leyla Farah",
+    email: "leyla.farah@email.com",
+    phone: "+252-90-456-7890",
     travelers: 3,
-    departureDate: "2024-10-15",
-    specialRequests: "Airport pickup",
+    departureDate: "2024-10-10",
+    specialRequests: "Aisle seats",
     totalPrice: 2697,
-    status: "confirmed",
-    createdAt: "2024-02-21T07:55:00Z"
+    status: "pending",
+    createdAt: "2024-04-12T13:20:00Z"
   },
   {
     id: "B009",
-    packageId: "somalia-1",
-    customerName: "Abdullahi Osman",
-    email: "abdullahi.osman@email.com",
-    phone: "+252-61-888-7777",
+    packageId: "somalia-3",
+    customerName: "Abdullahi Warsame",
+    email: "abdullahi.warsame@email.com",
+    phone: "+252-61-999-1234",
     travelers: 1,
     departureDate: "2024-11-05",
-    specialRequests: "Early check-in",
+    specialRequests: "No peanuts",
     totalPrice: 899,
-    status: "pending",
-    createdAt: "2024-02-22T10:15:00Z"
+    status: "confirmed",
+    createdAt: "2024-04-20T08:50:00Z"
   },
   {
     id: "B010",
-    packageId: "somalia-2",
-    customerName: "Maryam Farah",
-    email: "maryam.farah@email.com",
-    phone: "+252-62-555-4444",
-    travelers: 4,
-    departureDate: "2024-12-12",
-    specialRequests: "Kids meals included",
-    totalPrice: 3596,
-    status: "confirmed",
-    createdAt: "2024-02-23T15:05:00Z"
+    packageId: "somalia-3",
+    customerName: "Sahra Ahmed",
+    email: "sahra.ahmed@email.com",
+    phone: "+252-61-111-2222",
+    travelers: 2,
+    departureDate: "2024-12-01",
+    specialRequests: "Extra pillows",
+    totalPrice: 1798,
+    status: "pending",
+    createdAt: "2024-05-01T10:10:00Z"
   },
   {
     id: "B011",
     packageId: "somalia-3",
-    customerName: "Ali Hussein",
-    email: "ali.hussein@email.com",
-    phone: "+252-63-999-0000",
-    travelers: 2,
-    departureDate: "2025-01-10",
-    specialRequests: "Accessible room",
-    totalPrice: 1798,
-    status: "cancelled",
-    createdAt: "2024-02-24T12:30:00Z"
+    customerName: "Ibrahim Ali",
+    email: "ibrahim.ali@email.com",
+    phone: "+252-90-234-5678",
+    travelers: 4,
+    departureDate: "2025-01-15",
+    specialRequests: "Window seats",
+    totalPrice: 3596,
+    status: "confirmed",
+    createdAt: "2024-05-10T09:30:00Z"
   },
   {
     id: "B012",
-    packageId: "somalia-4",
-    customerName: "Nadia Mohamed",
-    email: "nadia.mohamed@email.com",
-    phone: "+252-91-123-7890",
-    travelers: 3,
+    packageId: "somalia-2",
+    customerName: "Khadija Omar",
+    email: "khadija.omar@email.com",
+    phone: "+252-61-333-4444",
+    travelers: 1,
     departureDate: "2025-02-05",
-    specialRequests: "Balcony view",
-    totalPrice: 2697,
-    status: "confirmed",
-    createdAt: "2024-02-25T09:50:00Z"
+    specialRequests: "Gluten-free meals",
+    totalPrice: 899,
+    status: "cancelled",
+    createdAt: "2024-05-20T12:15:00Z"
   },
   {
     id: "B013",
-    packageId: "somalia-1",
-    customerName: "Yusuf Abdikarim",
-    email: "yusuf.abdikarim@email.com",
-    phone: "+252-61-321-4567",
+    packageId: "somalia-2",
+    customerName: "Mohamud Hassan",
+    email: "mohamud.hassan@email.com",
+    phone: "+252-61-555-6666",
     travelers: 2,
-    departureDate: "2025-03-01",
-    specialRequests: "Wheelchair access",
+    departureDate: "2025-03-10",
+    specialRequests: "Extra luggage",
     totalPrice: 1798,
     status: "pending",
-    createdAt: "2024-02-26T18:40:00Z"
+    createdAt: "2024-06-01T14:00:00Z"
   },
   {
     id: "B014",
-    packageId: "somalia-2",
-    customerName: "Halima Noor",
-    email: "halima.noor@email.com",
-    phone: "+252-62-765-1111",
-    travelers: 5,
-    departureDate: "2025-03-25",
-    specialRequests: "Adjacent rooms",
-    totalPrice: 4495,
+    packageId: "somalia-1",
+    customerName: "Faduma Yusuf",
+    email: "faduma.yusuf@email.com",
+    phone: "+252-90-567-8901",
+    travelers: 3,
+    departureDate: "2025-04-05",
+    specialRequests: "Vegan meals",
+    totalPrice: 2697,
     status: "confirmed",
-    createdAt: "2024-02-27T07:10:00Z"
+    createdAt: "2024-06-10T09:45:00Z"
   },
   {
     id: "B015",
-    packageId: "somalia-3",
-    customerName: "Ismail Mohamed",
-    email: "ismail.mohamed@email.com",
-    phone: "+252-63-456-9999",
+    packageId: "somalia-1",
+    customerName: "Ahmed Abdirahman",
+    email: "ahmed.abdirahman@email.com",
+    phone: "+252-61-777-8889",
     travelers: 1,
-    departureDate: "2025-04-15",
-    specialRequests: "Vegetarian meals",
+    departureDate: "2025-05-01",
+    specialRequests: "Wheelchair accessible",
     totalPrice: 899,
-    status: "confirmed",
-    createdAt: "2024-02-28T14:25:00Z"
+    status: "pending",
+    createdAt: "2024-06-20T08:30:00Z"
   },
   {
     id: "B016",
-    packageId: "somalia-4",
-    customerName: "Fadumo Abdi",
-    email: "fadumo.abdi@email.com",
-    phone: "+252-90-123-4567",
-    travelers: 3,
-    departureDate: "2025-05-05",
-    specialRequests: "Tour guide in Somali",
-    totalPrice: 2697,
-    status: "pending",
-    createdAt: "2024-03-01T11:00:00Z"
+    packageId: "somalia-1",
+    customerName: "Asha Mohamed",
+    email: "asha.mohamed@email.com",
+    phone: "+252-61-888-9999",
+    travelers: 2,
+    departureDate: "2025-06-12",
+    specialRequests: "Child meals",
+    totalPrice: 1798,
+    status: "confirmed",
+    createdAt: "2024-07-01T10:50:00Z"
   },
   {
     id: "B017",
     packageId: "somalia-1",
-    customerName: "Salman Ali",
-    email: "salman.ali@email.com",
-    phone: "+252-61-432-1111",
-    travelers: 2,
-    departureDate: "2025-05-28",
-    specialRequests: "Quiet room",
-    totalPrice: 1798,
-    status: "confirmed",
-    createdAt: "2024-03-02T09:45:00Z"
+    customerName: "Hussein Abdullahi",
+    email: "hussein.abdullahi@email.com",
+    phone: "+252-90-678-9012",
+    travelers: 3,
+    departureDate: "2025-07-10",
+    specialRequests: "No nuts",
+    totalPrice: 2697,
+    status: "cancelled",
+    createdAt: "2024-07-10T09:15:00Z"
   },
   {
     id: "B018",
-    packageId: "somalia-2",
-    customerName: "Zahra Ibrahim",
-    email: "zahra.ibrahim@email.com",
-    phone: "+252-62-222-8888",
-    travelers: 4,
-    departureDate: "2025-06-20",
-    specialRequests: "Sea view rooms",
-    totalPrice: 3596,
-    status: "confirmed",
-    createdAt: "2024-03-03T08:30:00Z"
+    packageId: "somalia-4",
+    customerName: "Muna Farah",
+    email: "muna.farah@email.com",
+    phone: "+252-61-999-0000",
+    travelers: 1,
+    departureDate: "2025-08-05",
+    specialRequests: "Window seat",
+    totalPrice: 899,
+    status: "pending",
+    createdAt: "2024-07-20T11:40:00Z"
   },
   {
     id: "B019",
-    packageId: "somalia-3",
-    customerName: "Khalid Omar",
-    email: "khalid.omar@email.com",
-    phone: "+252-63-777-2222",
+    packageId: "somalia-4",
+    customerName: "Abdirizak Osman",
+    email: "abdirizak.osman@email.com",
+    phone: "+252-61-111-3333",
     travelers: 2,
-    departureDate: "2025-07-10",
-    specialRequests: "Airport shuttle",
+    departureDate: "2025-09-01",
+    specialRequests: "Extra pillows",
     totalPrice: 1798,
-    status: "cancelled",
-    createdAt: "2024-03-04T17:15:00Z"
+    status: "confirmed",
+    createdAt: "2024-08-01T08:20:00Z"
   },
   {
     id: "B020",
-    packageId: "somalia-4",
-    customerName: "Samira Ahmed",
-    email: "samira.ahmed@email.com",
-    phone: "+252-91-654-3333",
-    travelers: 3,
-    departureDate: "2025-08-05",
-    specialRequests: "Extra blankets",
-    totalPrice: 2697,
-    status: "confirmed",
-    createdAt: "2024-03-05T19:50:00Z"
+    packageId: "somalia-3",
+    customerName: "Sahra Mohamed",
+    email: "sahra.mohamed@email.com",
+    phone: "+252-90-789-0123",
+    travelers: 4,
+    departureDate: "2025-10-10",
+    specialRequests: "Vegan meals",
+    totalPrice: 3596,
+    status: "pending",
+    createdAt: "2024-08-10T09:55:00Z"
   }
 ];
 
-const AdminPage = () => {
+// =================== Admin Credentials ===================
+const ADMIN_EMAIL = "munawar@gmail.com";
+const ADMIN_PASSWORD = "admin123";
 
+// =================== Admin Dashboard Component ===================
+const AdminPageContent = ({ onLogout }: { onLogout: () => void }) => {
   const [activeTab, setActiveTab] = useState("overview");
+
   const totalPackages = travelPackages.length;
   const totalBookings = mockBookings.length;
   const totalRevenue = mockBookings.reduce((sum, booking) => sum + booking.totalPrice, 0);
@@ -306,11 +298,18 @@ const AdminPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background-light to-accent/10">
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary-dark bg-clip-text text-transparent mb-2">
-            Admin Dashboard
-          </h1>
-          <p className="text-lg text-muted-foreground">Travel booking management system</p>
+        {/* Header */}
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h1 className="text-4xl font-bold bg-gradient-to-r from-primary via-accent to-primary-dark bg-clip-text text-transparent mb-2">
+              Admin Dashboard
+            </h1>
+            <p className="text-lg text-muted-foreground">Travel booking management system</p>
+          </div>
+          <Button variant="outline" onClick={onLogout} className="flex items-center space-x-2">
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
+          </Button>
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -320,6 +319,7 @@ const AdminPage = () => {
             <TabsTrigger value="bookings">Bookings</TabsTrigger>
           </TabsList>
 
+          {/* Overview */}
           <TabsContent value="overview">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <Card>
@@ -361,6 +361,7 @@ const AdminPage = () => {
             </div>
           </TabsContent>
 
+          {/* Packages */}
           <TabsContent value="packages">
             <Card>
               <CardHeader>
@@ -393,6 +394,7 @@ const AdminPage = () => {
             </Card>
           </TabsContent>
 
+          {/* Bookings */}
           <TabsContent value="bookings">
             <Card>
               <CardHeader>
@@ -428,4 +430,66 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+// =================== Login Component with Password Toggle ===================
+const AdminLogin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      setError("");
+    } else {
+      setError("Email or password is incorrect");
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setEmail("");
+    setPassword("");
+  };
+
+  if (isAuthenticated) {
+    return <AdminPageContent onLogout={handleLogout} />;
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background-light to-accent/10">
+      <form onSubmit={handleLogin} className="bg-white p-8 rounded-xl shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-6 text-center">Admin Login</h2>
+        {error && <p className="text-red-500 mb-4 text-center">{error}</p>}
+
+        <div className="mb-4">
+          <label className="block mb-1 font-medium">Email</label>
+          <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </div>
+
+        <div className="mb-6 relative">
+          <label className="block mb-1 font-medium">Password</label>
+          <Input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-2 top-9 text-sm text-gray-500"
+          >
+            {showPassword ? "Hide" : "Show"}
+          </button>
+        </div>
+
+        <Button type="submit" className="w-full">Login</Button>
+      </form>
+    </div>
+  );
+};
+
+export default AdminLogin;

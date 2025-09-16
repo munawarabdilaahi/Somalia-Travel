@@ -2,7 +2,7 @@ import { MapPin, Phone, Mail, Facebook, Instagram, Twitter } from "lucide-react"
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-br from-primary via-primary-dark to-accent text-white">
+    <footer className="bg-gradient-to-br from-primary via-primary-dark to-black text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -75,7 +75,7 @@ const Footer = () => {
         <div className="border-t border-white/20 mt-8 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-white/60 text-sm">
-              © 2024 Somalia Travel. All rights reserved.
+              © 2025 Somalia Travel. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-white/60 hover:text-accent transition-colors">

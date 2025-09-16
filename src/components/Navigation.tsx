@@ -102,7 +102,7 @@ const Navigation = () => {
                 onClick={() => setShowAuthModal(true)}
               >
                 <User className="h-4 w-4 mr-2" />
-                Admin
+                Sing in
               </Button>
             )}
           </div>

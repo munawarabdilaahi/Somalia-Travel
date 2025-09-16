@@ -11,7 +11,7 @@ import PackagesPage from "./pages/PackagesPage";
 import PackageDetailPage from "./pages/PackageDetailPage";
 import BookingPage from "./pages/BookingPage";
 import ReviewsPage from "./pages/ReviewsPage";
-import AdminPage from "@/pages/AdminPage";
+import AdminPage from "@/pages/AdminLogin";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 

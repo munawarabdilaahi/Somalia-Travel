@@ -13,6 +13,8 @@ import egyptImg from "@/assets/egypt.jpg";
 export const travelPackages: TravelPackage[] = [
   ...somaliaPackages,
 
+  
+
   {
     id: "1",
     title: "Tropical Paradise Escape",

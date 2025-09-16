@@ -1,8 +1,6 @@
 import { TravelPackage } from '@/types/travel';
-import mogadishuCoastImg from '@/assets/mogadishu-coast.jpg';
 import berberaBeachesImg from '@/assets/berbera-beaches.jpg';
 import kismayoParkImg from '@/assets/kismayo-park.jpg';
-import hamarWeyne from '@/assets/hamar-weyne.jpg';
 
 export const somaliaPackages: TravelPackage[] = [
   {
@@ -17,7 +15,7 @@ export const somaliaPackages: TravelPackage[] = [
     originalPrice: 1199,
     rating: 4.8,
     reviewCount: 127,
-    image: mogadishuCoastImg,
+    image: "https://i.pinimg.com/736x/8c/ca/40/8cca403b4e7892bcfa29bcf0a2a0f640.jpg",
     category: "beach",
     features: ["Luxury beachfront resort", "Cultural city tours", "Traditional cuisine", "Professional guide"],
     itinerary: [
@@ -59,6 +57,61 @@ export const somaliaPackages: TravelPackage[] = [
     currentBookings: 8,
     featured: true,
     highlights: ["UNESCO Heritage Sites", "Traditional Dhow Cruises", "Authentic Somali Cuisine"]
+  },
+  {
+    id: "somalia-5",
+    title: "maldives",
+    description: "Experience the tropical paradise of the Maldives. Relax on pristine white-sand beaches, dive into crystal-clear turquoise waters, and explore vibrant coral reefs teeming with marine life. Stay in luxurious overwater villas and enjoy world-class hospitality in one of the world’s most exclusive island destinations.",
+    shortDescription: "Relax on pristine white-sand beaches",
+    destination: "maldives",
+    location: "maldives",
+    duration: "5 days, 4 nights",
+    price: 1199,
+    originalPrice: 1789,
+    rating: 5.0,
+    reviewCount: 127,
+    image: "https://i.pinimg.com/736x/0f/0c/4b/0f0c4b47cac22f43efd922eebc158e9d.jpg",
+    category: "beach",
+    features: ["Luxury beachfront resort", "Cultural city tours", "Traditional cuisine", "Professional guide"],
+    itinerary: [
+      {
+        day: 1,
+        title: "Arrival & Beach Welcome",
+        description: "Arrive in Mogadishu and settle into your beachfront accommodation",
+        activities: ["Airport pickup", "Hotel check-in", "Welcome dinner", "Beach sunset walk"]
+      },
+      {
+        day: 2,
+        title: "Historical maldives",
+        description: "Explore the rich history and architecture of Somalia's capital",
+        activities: ["history of then town", "National Museum", "Traditional lunch", "Local markets"]
+      },
+      {
+        day: 3,
+        title: "Coastal Adventure",
+        description: "Full day of beach activities and water sports",
+        activities: ["Snorkeling", "Dhow boat ride", "Beach volleyball", "Seafood barbecue"]
+      },
+      {
+        day: 4,
+        title: "Cultural Immersion",
+        description: "Deep dive into maldives culture and traditions",
+        activities: ["Traditional dance show", "Henna painting", "Cooking class", "Poetry evening"]
+      },
+      {
+        day: 5,
+        title: "Departure",
+        description: "Final morning at leisure before departure",
+        activities: ["Beach walk", "Souvenir shopping", "Airport transfer"]
+      }
+    ],
+    included: ["Accommodation", "All meals", "Transportation", "Guide services", "Activities"],
+    excluded: ["International flights", "Travel insurance", "Personal expenses", "Tips"],
+    availability: "available",
+    maxCapacity: 30,
+    currentBookings: 12,
+    featured: true,
+    highlights: ["UNESCO Heritage Sites", "Traditional Dhow Cruises", "Authentic maldives Cuisine"]
   },
   {
     id: "somalia-2",
@@ -200,7 +253,7 @@ export const somaliaPackages: TravelPackage[] = [
     originalPrice: 899,
     rating: 4.6,
     reviewCount: 203,
-    image: hamarWeyne,
+    image: "https://i.pinimg.com/736x/a2/70/2c/a2702c0e4252b9da3a27901e0e0e9ddd.jpg",
     category: "cultural",
     features: ["Historic architecture", "Traditional crafts", "Cultural workshops", "Local homestay"],
     itinerary: [
@@ -234,6 +287,153 @@ export const somaliaPackages: TravelPackage[] = [
     availability: "available",
     maxCapacity: 25,
     currentBookings: 18,
+    featured: true,
+    highlights: ["13th Century Architecture", "Master Craftsmen", "Living Heritage"]
+  },
+  {
+    id: "somalia-6",
+    title: "France (Paris)",
+    description: "Discover the romance and charm of Paris, the City of Light. From iconic landmarks such as the Eiffel Tower and the Louvre Museum to charming streetside cafés and the Seine River, immerse yourself in French art, history, and culture. Enjoy luxury accommodations and exquisite cuisine in the heart of Europe’s most beloved city.",
+    shortDescription: "Cultural immersion in Somalia's historic heart",
+    destination: "France", 
+    location: "paris, france",
+    duration: "6 days, 5 nights",
+    price: 1990,
+    originalPrice: 2329,
+    rating: 5.2,
+    reviewCount: 220,
+    image: "https://i.pinimg.com/1200x/c8/43/b1/c843b1a2cdc681da7216073828d5aaa3.jpg",
+    category: "cultural",
+    features: ["Historic architecture", "Traditional crafts", "Cultural workshops", "Local paris"],
+    itinerary: [
+      {
+        day: 1,
+        title: "Heritage Quarter Discovery",
+        description: "Step into living history",
+        activities: ["Walking tour", "Ancient mosques", "Traditional lunch", "Craft workshops"]
+      },
+      {
+        day: 2,
+        title: "Artisan Immersion",
+        description: "Learn traditional france crafts",
+        activities: ["Weaving workshop", "Jewelry making", "Pottery class", "Cultural performance"]
+      },
+      {
+        day: 3,
+        title: "Culinary Journey",
+        description: "Master the flavors of franceis",
+        activities: ["Market tour", "Cooking class", "Spice blending", "Traditional feast"]
+      },
+      {
+        day: 4,
+        title: "Cultural Celebration",
+        description: "Join in local traditions",
+        activities: ["Morning prayers", "Community gathering", "Farewell ceremony", "Departure"]
+      }
+    ],
+    included: ["Traditional accommodation", "All meals", "Cultural activities", "Local guide", "Workshops"],
+    excluded: ["Transportation to Mogadishu", "Personal purchases", "Tips", "Modern amenities"],
+    availability: "available",
+    maxCapacity: 50,
+    currentBookings: 30,
+    featured: true,
+    highlights: ["13th Century Architecture", "Master Craftsmen", "Living Heritage"]
+  },
+  {
+    id: "somalia-7",
+    title: "Rio de Janeiro",
+    description: "Experience the rhythm and energy of Rio de Janeiro. Bask on the golden sands of Copacabana Beach, marvel at the Christ the Redeemer statue atop Corcovado Mountain, and enjoy breathtaking views from Sugarloaf Mountain. With samba, carnival spirit, and warm hospitality, Rio offers the perfect mix of culture and adventure.",
+    shortDescription: "Cultural immersion in Somalia's historic heart",
+    destination: "Rio de Janeiro", 
+    location: "Brazil , Rio de Janeiro",
+    duration: "8 days, 7 nights",
+    price: 1790,
+    originalPrice: 1929,
+    rating: 4.8,
+    reviewCount: 220,
+    image: "https://i.pinimg.com/736x/9f/7f/38/9f7f38ab09b8aee967e9c57c54b7b10e.jpg",
+    category: "cultural",
+    features: ["Historic architecture", "Traditional crafts", "Cultural workshops", "Local Rio de Janeiro"],
+    itinerary: [
+      {
+        day: 1,
+        title: "Heritage Quarter Discovery",
+        description: "Step into living history",
+        activities: ["Walking tour", "Ancient mosques", "Traditional lunch", "Craft workshops"]
+      },
+      {
+        day: 2,
+        title: "Artisan Immersion",
+        description: "Learn traditional Brazillian crafts",
+        activities: ["Weaving workshop", "Jewelry making", "Pottery class", "Cultural performance"]
+      },
+      {
+        day: 3,
+        title: "Culinary Journey",
+        description: "Master the flavors of Brazillian",
+        activities: ["Market tour", "Cooking class", "Spice blending", "Traditional feast"]
+      },
+      {
+        day: 4,
+        title: "Cultural Celebration",
+        description: "Join in local traditions",
+        activities: ["Morning prayers", "Community gathering", "Farewell ceremony", "Departure"]
+      }
+    ],
+    included: ["Traditional accommodation", "All meals", "Cultural activities", "Local guide", "Workshops"],
+    excluded: ["Transportation to Rio de Janeiro", "Personal purchases", "Tips", "Modern amenities"],
+    availability: "available",
+    maxCapacity: 40,
+    currentBookings: 30,
+    featured: true,
+    highlights: ["13th Century Architecture", "Master Craftsmen", "Living Heritage"]
+  },
+  {
+    id: "somalia-6",
+    title: "France (marsile)",
+    description: "Discover the romance and charm of Paris, the City of Light. From iconic landmarks such as the Eiffel Tower and the Louvre Museum to charming streetside cafés and the Seine River, immerse yourself in French art, history, and culture. Enjoy luxury accommodations and exquisite cuisine in the heart of Europe’s most beloved city.",
+    shortDescription: "Cultural immersion in Somalia's historic heart",
+    destination: "France", 
+    location: "marsile, france",
+    duration: "6 days, 5 nights",
+    price: 1990,
+    originalPrice: 2329,
+    rating: 5.2,
+    reviewCount: 220,
+    image: "https://i.pinimg.com/1200x/be/42/c4/be42c4d35c8afa345442fe77fb6de9e1.jpg",
+    category: "cultural",
+    features: ["Historic architecture", "Traditional crafts", "Cultural workshops", "Local marsile"],
+    itinerary: [
+      {
+        day: 1,
+        title: "Heritage Quarter Discovery",
+        description: "Step into living history",
+        activities: ["Walking tour", "Ancient mosques", "Traditional lunch", "Craft workshops"]
+      },
+      {
+        day: 2,
+        title: "Artisan Immersion",
+        description: "Learn traditional france crafts",
+        activities: ["Weaving workshop", "Jewelry making", "Pottery class", "Cultural performance"]
+      },
+      {
+        day: 3,
+        title: "Culinary Journey",
+        description: "Master the flavors of franceis",
+        activities: ["Market tour", "Cooking class", "Spice blending", "Traditional feast"]
+      },
+      {
+        day: 4,
+        title: "Cultural Celebration",
+        description: "Join in local traditions",
+        activities: ["Morning prayers", "Community gathering", "Farewell ceremony", "Departure"]
+      }
+    ],
+    included: ["Traditional accommodation", "All meals", "Cultural activities", "Local guide", "Workshops"],
+    excluded: ["Transportation to Mogadishu", "Personal purchases", "Tips", "Modern amenities"],
+    availability: "available",
+    maxCapacity: 50,
+    currentBookings: 30,
     featured: true,
     highlights: ["13th Century Architecture", "Master Craftsmen", "Living Heritage"]
   }
