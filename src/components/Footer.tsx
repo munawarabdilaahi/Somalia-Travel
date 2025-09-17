@@ -8,11 +8,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <h3 className="text-2xl font-bold bg-gradient-to-r from-accent to-accent-light bg-clip-text text-transparent">
-              Somalia Travel
+              Som Travel
             </h3>
             <p className="text-white/80 leading-relaxed">
-              Discover the hidden gems of Somalia with our expertly crafted travel experiences. 
-              From pristine beaches to cultural heritage sites, we make every journey unforgettable.
+              "Discover the hidden gems of Somalia and around the world with our expertly crafted travel experiences. From pristine beaches to cultural heritage sites, we make every journey unforgettable."
             </p>
             <div className="flex space-x-4">
               <Facebook className="w-5 h-5 hover:text-accent cursor-pointer transition-colors" />
@@ -61,11 +60,11 @@ const Footer = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-white/80 text-sm">+252 1 234 567</span>
+                <span className="text-white/80 text-sm">+252 61 3 69 71 69</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-accent flex-shrink-0" />
-                <span className="text-white/80 text-sm">info@somaliatravel.com</span>
+                <span className="text-white/80 text-sm">info@somtravel.com</span>
               </div>
             </div>
           </div>
@@ -75,7 +74,7 @@ const Footer = () => {
         <div className="border-t border-white/20 mt-8 pt-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-white/60 text-sm">
-              © 2025 Somalia Travel. All rights reserved.
+              © 2025 Som Travel. All rights reserved.
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-white/60 hover:text-accent transition-colors">

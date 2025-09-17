@@ -131,7 +131,7 @@ const Index = () => {
           <div className="text-center mb-16">
             <Badge variant="outline" className="mb-4 px-4 py-2">
               <Globe className="h-4 w-4 mr-2" />
-              Why Choose Somalia Travel
+              Why Choose Som Travel
             </Badge>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-premium bg-clip-text text-transparent">
               Your Adventure Awaits
@@ -232,7 +232,7 @@ const Index = () => {
               Travel Excellence by Numbers
             </h2>
             <p className="text-xl text-black/80 max-w-2xl mx-auto">
-              Join thousands of satisfied travelers who have chosen WanderLux for their dream vacations
+              Join thousands of satisfied travelers who have chosen som Luxy for their dream vacations
             </p>
           </div>
 

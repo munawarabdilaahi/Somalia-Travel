@@ -39,7 +39,7 @@ const Navigation = () => {
               <Plane className="h-6 w-6 text-white" />
             </div>
             <span className="text-xl font-bold bg-gradient-ocean bg-clip-text text-transparent">
-              Somalia Travel
+              Som Travel
             </span>
           </Link>
 

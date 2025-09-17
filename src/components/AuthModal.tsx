@@ -104,7 +104,7 @@ const AuthModal = ({ isOpen, onClose, onAuthenticated }: AuthModalProps) => {
       <DialogContent className="sm:max-w-md bg-white/95 backdrop-blur-xl border-0 shadow-luxury">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center bg-gradient-ocean bg-clip-text text-transparent">
-            Welcome to Somalia Travel
+            Welcome to Som Travel
           </DialogTitle>
         </DialogHeader>
 

@@ -184,7 +184,7 @@ const ReviewsPage = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Customer Reviews</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            See what our travelers are saying about their WanderLux experiences
+            See what our travelers are saying about their Som Travel experiences
           </p>
         </div>
 
