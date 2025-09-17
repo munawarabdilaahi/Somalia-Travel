@@ -188,8 +188,14 @@ const BookingPage = () => {
                             required
                           >
                             <option value="">Select a date</option>
+                            <option value="2025-09-20">20/09/2025</option>
                             <option value="2025-10-10">10/10/2025</option>
+                            <option value="2025-11-01">01/11/2025</option>
                             <option value="2025-11-20">20/11/2025</option>
+                            <option value="2025-12-10">10/12/2025</option>
+                            <option value="2026-01-01">01/01/2026</option>
+                            <option value="2026-01-30">30/01/2026</option>
+                            <option value="2026-02-20">20/02/2026</option>
                           </select>
                         </div>
                       </div>

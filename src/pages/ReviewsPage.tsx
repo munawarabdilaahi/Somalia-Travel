@@ -8,8 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Review } from "@/types/travel";
 
-// Mock review data
-const reviews: Review[] = [
+const initialReviews: Review[] = [
   {
     id: "1",
     packageId: "1",
@@ -60,7 +59,7 @@ const reviews: Review[] = [
     verified: true,
     avatar: "FA"
   },
-  {
+    {
     id: "7",
     packageId: "7",
     customerName: "David Miller",
@@ -109,13 +108,20 @@ const reviews: Review[] = [
     date: "2023-12-20",
     verified: false,
     avatar: "JP"
-  }
+  },
+
 ];
 
 const ReviewsPage = () => {
+  const [reviews, setReviews] = useState<Review[]>(initialReviews);
   const [filterRating, setFilterRating] = useState("");
   const [sortBy, setSortBy] = useState("newest");
   const [searchQuery, setSearchQuery] = useState("");
+
+  // Form state for new comment
+  const [newName, setNewName] = useState("");
+  const [newRating, setNewRating] = useState("5");
+  const [newComment, setNewComment] = useState("");
 
   const renderStars = (rating: number) => {
     return (
@@ -123,8 +129,7 @@ const ReviewsPage = () => {
         {[1, 2, 3, 4, 5].map((star) => (
           <Star
             key={star}
-            className={`h-4 w-4 ${star <= rating ? "fill-accent text-accent" : "text-muted-foreground"
-              }`}
+            className={`h-4 w-4 ${star <= rating ? "fill-accent text-accent" : "text-muted-foreground"}`}
           />
         ))}
       </div>
@@ -151,21 +156,40 @@ const ReviewsPage = () => {
     reviews.filter(review => review.rating === rating).length
   );
 
+  // Handler to add new review
+  const handleAddReview = () => {
+    if (!newName || !newComment) return;
+
+    const newReview: Review = {
+      id: (reviews.length + 1).toString(),
+      packageId: "custom",
+      customerName: newName,
+      rating: parseInt(newRating),
+      comment: newComment,
+      date: new Date().toISOString(),
+      verified: false,
+      avatar: newName.split(" ").map(n => n[0]).join("").toUpperCase()
+    };
+
+    setReviews([newReview, ...reviews]);
+    setNewName("");
+    setNewComment("");
+    setNewRating("5");
+  };
+
   return (
     <div className="min-h-screen bg-gradient-sky">
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Customer Reviews
-          </h1>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">Customer Reviews</h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             See what our travelers are saying about their WanderLux experiences
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Sidebar - Rating Summary */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
             <Card className="shadow-card-travel mb-6">
               <CardHeader>
@@ -179,12 +203,8 @@ const ReviewsPage = () => {
                   <div className="flex justify-center mb-2">
                     {renderStars(Math.round(averageRating))}
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    Based on {reviews.length} reviews
-                  </p>
+                  <p className="text-sm text-muted-foreground">Based on {reviews.length} reviews</p>
                 </div>
-
-                {/* Rating Breakdown */}
                 <div className="space-y-2">
                   {[5, 4, 3, 2, 1].map((rating, index) => (
                     <div key={rating} className="flex items-center gap-2">
@@ -198,9 +218,7 @@ const ReviewsPage = () => {
                           }}
                         />
                       </div>
-                      <span className="text-sm text-muted-foreground w-8">
-                        {ratingCounts[index]}
-                      </span>
+                      <span className="text-sm text-muted-foreground w-8">{ratingCounts[index]}</span>
                     </div>
                   ))}
                 </div>
@@ -270,64 +288,90 @@ const ReviewsPage = () => {
           </div>
 
           {/* Reviews List */}
-          <div className="lg:col-span-3">
-            <div className="space-y-6">
-              {filteredReviews.length > 0 ? (
-                filteredReviews.map((review) => (
-                  <Card key={review.id} className="shadow-card-travel">
-                    <CardContent className="p-6">
-                      <div className="flex items-start gap-4">
-                        {/* Avatar */}
-                        <Avatar>
-                          <AvatarFallback className="bg-primary text-primary-foreground">
-                            {review.avatar}
-                          </AvatarFallback>
-                        </Avatar>
+          <div className="lg:col-span-3 space-y-6">
+            {/* New Review Form */}
+            <Card className="shadow-card-travel">
+              <CardHeader>
+                <CardTitle>Add Your Review</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Your Name</label>
+                  <Input value={newName} onChange={(e) => setNewName(e.target.value)} placeholder="Enter your name" />
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Rating</label>
+                  <Select value={newRating} onValueChange={setNewRating}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    {/* <SelectContent>
+                      <SelectItem value="5">5 stars</SelectItem>
+                      <SelectItem value="4">4 stars</SelectItem>
+                      <SelectItem value="3">3 stars</SelectItem>
+                      <SelectItem value="2">2 stars</SelectItem>
+                      <SelectItem value="1">1 star</SelectItem>
+                    </SelectContent> */}
+                  </Select>
+                </div>
+                <div>
+                  <label className="text-sm font-medium mb-2 block">Comment</label>
+                  <Input
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Write your review"
+                  />
+                </div>
+                <Button onClick={handleAddReview} className="w-full">Submit Review</Button>
+              </CardContent>
+            </Card>
 
-                        <div className="flex-1">
-                          {/* Header */}
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <div className="flex items-center gap-2 mb-1">
-                                <h4 className="font-semibold">{review.customerName}</h4>
-                                {review.verified && (
-                                  <Badge variant="outline" className="flex items-center gap-1">
-                                    <CheckCircle className="h-3 w-3" />
-                                    Verified
-                                  </Badge>
-                                )}
-                              </div>
-                              <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                                <Calendar className="h-4 w-4" />
-                                <span>{new Date(review.date).toLocaleDateString()}</span>
-                              </div>
+            {/* Existing Reviews */}
+            {filteredReviews.length > 0 ? (
+              filteredReviews.map((review) => (
+                <Card key={review.id} className="shadow-card-travel">
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <Avatar>
+                        <AvatarFallback className="bg-primary text-primary-foreground">
+                          {review.avatar}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex-1">
+                        <div className="flex items-start justify-between mb-3">
+                          <div>
+                            <div className="flex items-center gap-2 mb-1">
+                              <h4 className="font-semibold">{review.customerName}</h4>
+                              {review.verified && (
+                                <Badge variant="outline" className="flex items-center gap-1">
+                                  <CheckCircle className="h-3 w-3" /> Verified
+                                </Badge>
+                              )}
                             </div>
-                            <div className="flex items-center gap-2">
-                              {renderStars(review.rating)}
-                              <span className="text-sm font-medium">{review.rating}.0</span>
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <Calendar className="h-4 w-4" />
+                              <span>{new Date(review.date).toLocaleDateString()}</span>
                             </div>
                           </div>
-
-                          {/* Review Content */}
-                          <p className="text-muted-foreground leading-relaxed">
-                            {review.comment}
-                          </p>
+                          <div className="flex items-center gap-2">
+                            {renderStars(review.rating)}
+                            <span className="text-sm font-medium">{review.rating}.0</span>
+                          </div>
                         </div>
+                        <p className="text-muted-foreground leading-relaxed">{review.comment}</p>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <Card>
-                  <CardContent className="p-12 text-center">
-                    <h3 className="text-xl font-semibold mb-2">No reviews found</h3>
-                    <p className="text-muted-foreground">
-                      Try adjusting your filters to see more reviews.
-                    </p>
+                    </div>
                   </CardContent>
                 </Card>
-              )}
-            </div>
+              ))
+            ) : (
+              <Card>
+                <CardContent className="p-12 text-center">
+                  <h3 className="text-xl font-semibold mb-2">No reviews found</h3>
+                  <p className="text-muted-foreground">Try adjusting your filters to see more reviews.</p>
+                </CardContent>
+              </Card>
+            )}
           </div>
         </div>
       </div>
