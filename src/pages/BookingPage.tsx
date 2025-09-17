@@ -16,15 +16,12 @@ const BookingPage = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const packageData = travelPackages.find(pkg => pkg.id === id);
+  const packageData = travelPackages.find((pkg) => pkg.id === id);
 
-  const [formData, setFormData] = useState({
-    customerName: "",
-    email: "",
-    phone: "",
+  const [formData, setFormData] = useState<any>({
     travelers: 1,
     departureDate: "",
-    specialRequests: ""
+    specialRequests: "",
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,9 +40,9 @@ const BookingPage = () => {
   }
 
   const handleInputChange = (field: string, value: string | number) => {
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
   };
 
@@ -57,34 +54,38 @@ const BookingPage = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate booking process
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    toast({
-      title: "Booking Confirmed!",
-      description: "Your travel booking has been successfully submitted. You'll receive a confirmation email shortly.",
-    });
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     setIsSubmitting(false);
-    
-    // Navigate to success page or packages
+
+    toast({
+      title: "Booking Confirmed 🎉",
+      description: `Your booking for ${packageData.title} with ${formData.travelers} traveler(s) has been confirmed!`,
+      className: "bg-green-600 text-white border-0",
+    });
+
     setTimeout(() => {
       navigate("/packages");
     }, 2000);
   };
 
   const isFormValid = () => {
-    return formData.customerName && 
-           formData.email && 
-           formData.phone && 
-           formData.departureDate && 
-           formData.travelers > 0;
+    if (!formData.departureDate || formData.travelers < 1) return false;
+
+    // Check all travelers' info
+    for (let i = 0; i < formData.travelers; i++) {
+      if (
+        !formData[`customerName${i}`] ||
+        !formData[`email${i}`] ||
+        !formData[`phone${i}`]
+      ) return false;
+    }
+    return true;
   };
 
   return (
     <div className="min-h-screen bg-gradient-sky">
       <div className="container mx-auto px-4 py-8">
-        {/* Back Button */}
         <Button variant="outline" onClick={() => navigate(-1)} className="mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
           Back
@@ -102,58 +103,71 @@ const BookingPage = () => {
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-6">
-                  {/* Personal Information */}
+                  {/* Travelers Dynamic Info */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">Personal Information</h3>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
-                        <div className="relative">
-                          <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                          <Input
-                            id="name"
-                            placeholder="Enter your full name"
-                            value={formData.customerName}
-                            onChange={(e) => handleInputChange("customerName", e.target.value)}
-                            className="pl-10"
-                            required
-                          />
+                    {Array.from({ length: formData.travelers }, (_, index) => (
+                      <div key={index} className="border p-4 rounded-lg space-y-4 bg-gray-50">
+                        <h4 className="font-medium">Traveler {index + 1}</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          {/* Full Name */}
+                          <div className="space-y-2">
+                            <Label htmlFor={`name-${index}`}>Full Name *</Label>
+                            <div className="relative">
+                              <User className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                              <Input
+                                id={`name-${index}`}
+                                placeholder="Enter your full name"
+                                value={formData[`customerName${index}`] || ""}
+                                onChange={(e) =>
+                                  handleInputChange(`customerName${index}`, e.target.value)
+                                }
+                                className="pl-10"
+                                required
+                              />
+                            </div>
+                          </div>
+
+                          {/* Email */}
+                          <div className="space-y-2">
+                            <Label htmlFor={`email-${index}`}>Email Address *</Label>
+                            <div className="relative">
+                              <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                              <Input
+                                id={`email-${index}`}
+                                type="email"
+                                placeholder="Enter your email"
+                                value={formData[`email${index}`] || ""}
+                                onChange={(e) =>
+                                  handleInputChange(`email${index}`, e.target.value)
+                                }
+                                className="pl-10"
+                                required
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Phone */}
+                        <div className="space-y-2">
+                          <Label htmlFor={`phone-${index}`}>Phone Number *</Label>
+                          <div className="relative">
+                            <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                            <Input
+                              id={`phone-${index}`}
+                              type="tel"
+                              placeholder="Enter your phone number"
+                              value={formData[`phone${index}`] || ""}
+                              onChange={(e) =>
+                                handleInputChange(`phone${index}`, e.target.value)
+                              }
+                              className="pl-10"
+                              required
+                            />
+                          </div>
                         </div>
                       </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="email">Email Address *</Label>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                          <Input
-                            id="email"
-                            type="email"
-                            placeholder="Enter your email"
-                            value={formData.email}
-                            onChange={(e) => handleInputChange("email", e.target.value)}
-                            className="pl-10"
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number *</Label>
-                      <div className="relative">
-                        <Phone className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Input
-                          id="phone"
-                          type="tel"
-                          placeholder="Enter your phone number"
-                          value={formData.phone}
-                          onChange={(e) => handleInputChange("phone", e.target.value)}
-                          className="pl-10"
-                          required
-                        />
-                      </div>
-                    </div>
+                    ))}
                   </div>
 
                   <Separator />
@@ -161,21 +175,22 @@ const BookingPage = () => {
                   {/* Trip Details */}
                   <div className="space-y-4">
                     <h3 className="text-lg font-semibold">Trip Details</h3>
-                    
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label htmlFor="departure">Departure Date *</Label>
                         <div className="relative">
                           <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                          <Input
+                          <select
                             id="departure"
-                            type="date"
                             value={formData.departureDate}
                             onChange={(e) => handleInputChange("departureDate", e.target.value)}
-                            className="pl-10"
-                            min={new Date().toISOString().split('T')[0]}
+                            className="pl-10 w-full border rounded-md h-10"
                             required
-                          />
+                          >
+                            <option value="">Select a date</option>
+                            <option value="2025-10-10">10/10/2025</option>
+                            <option value="2025-11-20">20/11/2025</option>
+                          </select>
                         </div>
                       </div>
 
@@ -189,7 +204,9 @@ const BookingPage = () => {
                             min="1"
                             max={packageData.maxCapacity}
                             value={formData.travelers}
-                            onChange={(e) => handleInputChange("travelers", parseInt(e.target.value))}
+                            onChange={(e) =>
+                              handleInputChange("travelers", parseInt(e.target.value))
+                            }
                             className="pl-10"
                             required
                           />
@@ -202,24 +219,21 @@ const BookingPage = () => {
 
                   {/* Special Requests */}
                   <div className="space-y-4">
-                    <h3 className="text-lg font-semibold">Special Requests</h3>
-                    <div className="space-y-2">
-                      <Label htmlFor="requests">Any special requirements or requests?</Label>
-                      <div className="relative">
-                        <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                        <Textarea
-                          id="requests"
-                          placeholder="Dietary restrictions, accessibility needs, preferences..."
-                          value={formData.specialRequests}
-                          onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                          className="pl-10 min-h-24"
-                        />
-                      </div>
+                    <Label htmlFor="requests">Special Requests</Label>
+                    <div className="relative">
+                      <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Textarea
+                        id="requests"
+                        placeholder="Dietary restrictions, accessibility needs, preferences..."
+                        value={formData.specialRequests}
+                        onChange={(e) => handleInputChange("specialRequests", e.target.value)}
+                        className="pl-10 min-h-24"
+                      />
                     </div>
                   </div>
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     size="lg"
                     className="w-full bg-gradient-ocean hover:opacity-90 transition-opacity"
                     disabled={!isFormValid() || isSubmitting}
@@ -238,7 +252,6 @@ const BookingPage = () => {
                 <CardTitle>Booking Summary</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                {/* Package Details */}
                 <div>
                   <img
                     src={packageData.image}
@@ -247,14 +260,9 @@ const BookingPage = () => {
                   />
                   <h4 className="font-semibold">{packageData.title}</h4>
                   <p className="text-sm text-muted-foreground">{packageData.location}</p>
-                  <Badge className="mt-2">
-                    {packageData.duration}
-                  </Badge>
+                  <Badge className="mt-2">{packageData.duration}</Badge>
                 </div>
-
                 <Separator />
-
-                {/* Pricing Breakdown */}
                 <div className="space-y-2">
                   <div className="flex justify-between">
                     <span>Package Price</span>
@@ -267,7 +275,13 @@ const BookingPage = () => {
                   {packageData.originalPrice && (
                     <div className="flex justify-between text-green-600">
                       <span>Discount</span>
-                      <span>-${((packageData.originalPrice - packageData.price) * formData.travelers).toLocaleString()}</span>
+                      <span>
+                        -$
+                        {(
+                          (packageData.originalPrice - packageData.price) *
+                          formData.travelers
+                        ).toLocaleString()}
+                      </span>
                     </div>
                   )}
                   <Separator />
@@ -276,10 +290,7 @@ const BookingPage = () => {
                     <span className="text-primary">${calculateTotal().toLocaleString()}</span>
                   </div>
                 </div>
-
                 <Separator />
-
-                {/* Policies */}
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <div className="flex items-center gap-2">
                     <Check className="h-4 w-4 text-green-500" />

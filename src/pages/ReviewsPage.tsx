@@ -228,14 +228,14 @@ const ReviewsPage = () => {
                     <SelectTrigger>
                       <SelectValue placeholder="All ratings" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {/* <SelectItem value="">All ratings</SelectItem>
+                    {/* <SelectContent>
+                      <SelectItem value="">All ratings</SelectItem>
                       <SelectItem value="5">5 stars</SelectItem>
                       <SelectItem value="4">4 stars</SelectItem>
                       <SelectItem value="3">3 stars</SelectItem>
                       <SelectItem value="2">2 stars</SelectItem>
-                      <SelectItem value="1">1 star</SelectItem> */}
-                    </SelectContent>
+                      <SelectItem value="1">1 star</SelectItem>
+                    </SelectContent> */}
                   </Select>
                 </div>
 
@@ -245,12 +245,12 @@ const ReviewsPage = () => {
                     <SelectTrigger>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
-                      {/* <SelectItem value="newest">Newest first</SelectItem>
+                    {/* <SelectContent>
+                      <SelectItem value="newest">Newest first</SelectItem>
                       <SelectItem value="oldest">Oldest first</SelectItem>
                       <SelectItem value="highest">Highest rating</SelectItem>
-                      <SelectItem value="lowest">Lowest rating</SelectItem> */}
-                    </SelectContent>
+                      <SelectItem value="lowest">Lowest rating</SelectItem>
+                    </SelectContent> */}
                   </Select>
                 </div>
 
